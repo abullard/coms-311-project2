@@ -69,7 +69,21 @@ public class WikiCrawler {
      * the web graph only over those pages, and writes the graph to the file fileName.
      */
     public void crawl() throws IOException {
+        
+    }
 
+    private String getHTMLStringFromLink(String url) throws IOException {
+        URL fullUrl = new URL(BASE_URL + url);
+        InputStream inputStream = fullUrl.openStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+        String line;
+        StringBuilder builder = new StringBuilder();
+        while((line = reader.readLine()) != null) {
+            builder.append(line);
+        }
+
+        return builder.toString();
     }
 
     /**
