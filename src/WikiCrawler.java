@@ -1,9 +1,7 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -54,7 +52,10 @@ public class WikiCrawler {
             // add strings that start with /wiki/, and doesn't contain ':' or '#' to the links list.
             String tempString = matcher.group(1);
             if((tempString.startsWith("/wiki/")) && (!tempString.contains(":")) && (!tempString.contains("#"))) {
-                links.add(matcher.group(1));
+
+                if(!links.contains(matcher.group(1))) {
+                    links.add(matcher.group(1));
+                }
             }
         }
 
@@ -69,7 +70,25 @@ public class WikiCrawler {
      * the web graph only over those pages, and writes the graph to the file fileName.
      */
     public void crawl() throws IOException {
-        
+
+        // construct graph
+        Graph graph = new Graph();
+
+        String currentUrl = this.seedUrl;
+
+        String doc = getHTMLStringFromLink(currentUrl);
+        List<String> links = extractLinks(doc);
+
+
+        graph.addVertex(currentUrl);
+        graph.addAllEdges(currentUrl, links);
+
+        File file = new File(this.fileName);
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write(graph.toString());
+        fileWriter.flush();
+        fileWriter.close();
+
     }
 
     private String getHTMLStringFromLink(String url) throws IOException {
