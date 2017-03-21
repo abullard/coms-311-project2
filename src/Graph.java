@@ -7,8 +7,6 @@ public class Graph {
 
     private HashMap<String, ArrayList<String>> adjecencyMatrix = new HashMap<>();
 
-    private Set<String> visitedSet = new HashSet<>();
-
     private List<String> vertices = new ArrayList<>();
 
     public Graph() {
@@ -17,9 +15,10 @@ public class Graph {
 
     public void addVertex(String vertex) {
 
-        this.vertices.add(vertex);
-        this.adjecencyMatrix.put(vertex, new ArrayList<>());
-        this.visitedSet.add(vertex);
+        if(!vertices.contains(vertex)) {
+            this.vertices.add(vertex);
+            this.adjecencyMatrix.put(vertex, new ArrayList<>());
+        }
 
     }
 
@@ -72,5 +71,22 @@ public class Graph {
 
 
         return builder.toString();
+    }
+
+    public HashMap<String, ArrayList<String>> getAdjecencyMatrix() {
+        return adjecencyMatrix;
+    }
+
+    public void setAdjecencyMatrix(HashMap<String, ArrayList<String>> adjecencyMatrix) {
+        this.adjecencyMatrix = adjecencyMatrix;
+    }
+
+
+    public List<String> getVertices() {
+        return vertices;
+    }
+
+    public void setVertices(List<String> vertices) {
+        this.vertices = vertices;
     }
 }

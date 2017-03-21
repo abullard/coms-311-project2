@@ -1,7 +1,6 @@
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +16,10 @@ public class WikiCrawler {
     private int max;
 
     private String fileName;
+
+    private Queue<String> toProcessQueue = new ArrayDeque<>();
+
+    private Set<String> visitedSet = new HashSet<>();
 
     public WikiCrawler(String seedUrl, int max, String fileName) {
         this.seedUrl = seedUrl;
@@ -42,7 +45,9 @@ public class WikiCrawler {
         ArrayList<String> links = new ArrayList<>();
 
         // eliminate everything up until the first paragraph tag
-        doc = doc.substring(doc.indexOf("<p>"), doc.length());
+        String tempDoc = doc.toLowerCase();
+        int firstPIndex = tempDoc.indexOf("<p>");
+        doc = doc.substring(firstPIndex, doc.length());
 
         // find all of the href tags
         Pattern pattern = Pattern.compile("href=\"(.*?)\"", Pattern.DOTALL);
@@ -71,24 +76,103 @@ public class WikiCrawler {
      */
     public void crawl() throws IOException {
 
+
         // construct graph
         Graph graph = new Graph();
 
         String currentUrl = this.seedUrl;
+        toProcessQueue.add(currentUrl);
 
-        String doc = getHTMLStringFromLink(currentUrl);
-        List<String> links = extractLinks(doc);
+        // while there are items in the process queue, process them
+        while(!toProcessQueue.isEmpty()) {
+            boolean full = false;
+            visitedSet.add(currentUrl);
 
 
-        graph.addVertex(currentUrl);
-        graph.addAllEdges(currentUrl, links);
+            // add the vertex to the graph
+            graph.addVertex(currentUrl);
+
+            // gets the links from the current document
+            String doc = getHTMLStringFromLink(currentUrl);
+            List<String> links = extractLinks(doc);
+
+            // so long as the graph is not full, we want to add stuff to the process queue
+            int i = 0;
+            boolean justDoneLoading = false;
+            while((graph.getVertices().size() < max) && i < links.size()) {
+
+                String currentLink = links.get(i);
+
+                // add it to the graph
+                graph.addVertex(currentLink);
+
+                // add the links to the queue if it is not in there and has yet to be visited
+                if(!visitedSet.contains(currentLink) && (!toProcessQueue.contains(currentLink))) {
+                    toProcessQueue.add(currentLink);
+                }
+
+                graph.addEdge(currentUrl, currentLink);
+
+                i++;
+
+                // if full, set flag for just done
+                if(graph.getVertices().size() == max){
+                    justDoneLoading = true;
+                }
+            }
+
+            // check for if graph is full, if so set flag
+            if(graph.getVertices().size() == max){
+                full = true;
+            }
+
+            // if just done loading
+            if(justDoneLoading == true) {
+                for(i = i; i < links.size(); i++) {
+                    if(toProcessQueue.contains(links.get(i))) {
+                        graph.addEdge(currentUrl, links.get(i));
+                    }
+                }
+                full = false;
+            }
+
+            // if already loaded and 
+            if(full == true) {
+                links = filterLinks(graph, links, currentUrl);
+                graph.addAllEdges(currentUrl, links);
+            }
+
+
+
+            // remove the element from the queue and set the current element to the next one
+            toProcessQueue.remove(currentUrl);
+            currentUrl = toProcessQueue.peek();
+        }
+
 
         File file = new File(this.fileName);
         FileWriter fileWriter = new FileWriter(file);
+        fileWriter.append(this.max + "\n");
         fileWriter.write(graph.toString());
         fileWriter.flush();
         fileWriter.close();
 
+    }
+
+    private List<String> filterLinks(Graph graph, List<String> links, String currentUrl) {
+
+        Set vertexSet = new HashSet<>(graph.getVertices());
+        List<String> filteredLinks = new ArrayList<>();
+
+        for (int i = 0; i < links.size(); i++) {
+            if(vertexSet.contains(links.get(i))) {
+                if(!filteredLinks.contains(links.get(i)) && (!currentUrl.equals(links.get(i)))) {
+                    filteredLinks.add(links.get(i));
+                }
+            }
+        }
+
+        return filteredLinks;
     }
 
     private String getHTMLStringFromLink(String url) throws IOException {
