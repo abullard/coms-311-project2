@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by jack on 3/10/17.
+ * @author Jack Meyer (jacmeyer@iastate.edu)
  */
 public class WikiCrawler {
 
@@ -20,6 +20,9 @@ public class WikiCrawler {
     private Queue<String> toProcessQueue = new ArrayDeque<>();
 
     private Set<String> visitedSet = new HashSet<>();
+
+    private int connectionCount = 0;
+
 
     public WikiCrawler(String seedUrl, int max, String fileName) {
         this.seedUrl = seedUrl;
@@ -74,7 +77,7 @@ public class WikiCrawler {
      * Consider the first max many pages that are visited when you do a BFS with seedUrl. The program should construct
      * the web graph only over those pages, and writes the graph to the file fileName.
      */
-    public void crawl() throws IOException {
+    public void crawl() throws IOException, InterruptedException {
 
 
         // construct graph
@@ -136,7 +139,7 @@ public class WikiCrawler {
                 full = false;
             }
 
-            // if already loaded and 
+            // if already loaded and
             if(full == true) {
                 links = filterLinks(graph, links, currentUrl);
                 graph.addAllEdges(currentUrl, links);
@@ -175,7 +178,14 @@ public class WikiCrawler {
         return filteredLinks;
     }
 
-    private String getHTMLStringFromLink(String url) throws IOException {
+    private String getHTMLStringFromLink(String url) throws IOException, InterruptedException {
+
+        System.out.println(connectionCount + " " + url);
+        if(connectionCount >= 100) {
+            Thread.sleep(3000);
+            connectionCount = 0;
+        }
+
         URL fullUrl = new URL(BASE_URL + url);
         InputStream inputStream = fullUrl.openStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -186,6 +196,7 @@ public class WikiCrawler {
             builder.append(line);
         }
 
+        connectionCount++;
         return builder.toString();
     }
 
