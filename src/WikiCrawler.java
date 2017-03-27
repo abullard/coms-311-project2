@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by jack on 3/10/17.
+ * Austin Bullard
  */
 public class WikiCrawler {
 

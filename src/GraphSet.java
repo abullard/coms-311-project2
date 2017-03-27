@@ -4,28 +4,27 @@ import java.util.*;
  * Created by jack on 3/15/17.
  * Austin Bullard
  */
-public class Graph {
-
-    private HashMap<String, ArrayList<String>> adjecencyMatrix = new HashMap<>();
+public class GraphSet {
+    private HashMap<String, HashSet<String>> adjecencyMatrix = new HashMap<>();
     private List<String> vertices = new ArrayList<>();
 
-    public Graph() {}
+    public GraphSet() {}
 
     public void addVertex(String vertex) {
         if(!vertices.contains(vertex)) {
             this.vertices.add(vertex);
-            this.adjecencyMatrix.put(vertex, new ArrayList<>());
+            this.adjecencyMatrix.put(vertex, new HashSet<>());
         }
     }
 
     public void addEdge(String fromVertex, String toVertex) {
         // protect against circular references
         if(!fromVertex.equals(toVertex)) {
-            List<String> edges = this.adjecencyMatrix.get(fromVertex);
+            HashSet<String> edges = this.adjecencyMatrix.get(fromVertex);
 
             // if the vertex doesn't exit, make it, and add the edge
             if(edges == null) {
-                this.adjecencyMatrix.put(fromVertex, new ArrayList<>());
+                this.adjecencyMatrix.put(fromVertex, new HashSet<>());
                 this.adjecencyMatrix.get(fromVertex).add(toVertex);
             } else {
                 edges.add(toVertex);
@@ -34,11 +33,11 @@ public class Graph {
     }
 
     public void addAllEdges(String fromVertex, List<String> toVertexList) {
-        List<String> edges = this.adjecencyMatrix.get(fromVertex);
+        HashSet<String> edges = this.adjecencyMatrix.get(fromVertex);
 
         // if the vertex doesn't exit, make it, and add the edge
         if(edges == null) {
-            this.adjecencyMatrix.put(fromVertex, new ArrayList<>(toVertexList));
+            this.adjecencyMatrix.put(fromVertex, new HashSet<>(toVertexList));
         } else {
             edges.addAll(toVertexList);
         }
@@ -57,11 +56,11 @@ public class Graph {
         return builder.toString();
     }
 
-    public HashMap<String, ArrayList<String>> getAdjecencyMatrix() {
+    public HashMap<String, HashSet<String>> getAdjecencyMatrix() {
         return adjecencyMatrix;
     }
 
-    public void setAdjecencyMatrix(HashMap<String, ArrayList<String>> adjecencyMatrix) {
+    public void setAdjecencyMatrix(HashMap<String, HashSet<String>> adjecencyMatrix) {
         this.adjecencyMatrix = adjecencyMatrix;
     }
 
