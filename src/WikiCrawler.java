@@ -79,8 +79,6 @@ public class WikiCrawler {
      * the web graph only over those pages, and writes the graph to the file fileName.
      */
     public void crawl() throws IOException, InterruptedException {
-
-
         // construct graph
         Graph graph = new Graph();
 

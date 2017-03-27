@@ -1,13 +1,8 @@
-4
-Ames Minneapolis
-Minneapolis Chicago
-Chicago Ames
-Ames Omaha
-Omaha Chicago
-Ames KansasCity
-KansasCity Chicago
-Chicago KansasCity
-Denver DesMoines
-DesMoines Portland
-Portland Denver
-Omaha Denver
+6
+F D
+D E
+E F
+D A
+C A
+A B
+B C

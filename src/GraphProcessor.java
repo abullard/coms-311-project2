@@ -23,8 +23,11 @@ public class GraphProcessor {
     private GraphSet reverse;
     private HashSet<String> revhs;
     private HashSet<String> orderhs;
+    private HashSet<String> dfshs;
+    private HashSet<String> scchs;
     private HashSet<String> n;
     private int counter;
+    private ArrayList<Timer> times;
 
     /**
      * Creates efficient data structures
@@ -74,7 +77,20 @@ public class GraphProcessor {
      * Computes the Strongly Connected Components for a given graph
      */
     private void computeSCC() {
+        //computer order of vertices
         computeOrder();
+        //unmark every vertex of V
+        scchs = new HashSet<>();
+
+        for(Timer t : times) {
+            String v = t.getVertex();
+            if(!scchs.contains(v)){
+                //reusing revhs
+                revhs = new HashSet<>();
+                SccDFS(t.getVertex());
+                System.out.println(revhs);
+            }
+        }
     }
 
     /**
@@ -89,7 +105,9 @@ public class GraphProcessor {
      *  A list of vertices
      */
     private void computeOrder() {
-        //construct HashSet for marking vertices
+        //construct ArrayList for order of finish times
+        times = new ArrayList<>();
+        //construct HashSet for marking vertices (unmarks all vertices)
         orderhs = new HashSet<>();
         //get the adjacency matrix for size of
         HashMap<String, HashSet<String>> hm = g.getAdjecencyMatrix();
@@ -104,7 +122,7 @@ public class GraphProcessor {
         while(iter.hasNext()) {
             String v = (String) iter.next();
             if(!orderhs.contains(v)) {
-                finishDFS(reverse, v);
+                finishDFS(v);
             }
         }
     }
@@ -185,21 +203,58 @@ public class GraphProcessor {
     }
 
     /**
-     *
-     * @param rev
+     * Finds the finish time of all vertices in the graph
      * @param v
      */
-    private void finishDFS(GraphSet rev, String v) {
+    private void finishDFS(String v) {
+        dfshs = new HashSet<>();
         //mark vertex
-       orderhs.add(v);
+        orderhs.add(v);
+
         //for every u such that <v, u> /in E
-
+        for(String temp : findListofEdges(v)) {
             //if u is unmarked, DFS(G, u)
-
+            if(!orderhs.contains(temp)) {
+                DFS(temp);
+            }
+        }
         //increment time
         counter++;
 
         //FinishTime[v] = counter
+        Timer vertex = new Timer(counter, v);
+        times.add(vertex);
+    }
+
+    /**
+     * Depth First Search of graph
+     * @param v
+     *  Vertex
+     */
+    private void DFS(String v) {
+        dfshs.add(v);
+
+        for(String temp : findListofEdges(v)) {
+            if(!dfshs.contains(temp)) {
+                DFS(temp);
+            }
+        }
+    }
+
+    /**
+     * Strongly connected Components DFS
+     * @param v
+     *  Vertex
+     */
+    private void SccDFS(String v) {
+        scchs.add(v);
+        revhs.add(v);
+
+        for(String temp : findListofEdges(v)) {
+            if(!scchs.contains(temp)) {
+                DFS(temp);
+            }
+        }
     }
 
     /**

@@ -1,14 +1,9 @@
 import java.util.*;
 
 /**
-<<<<<<< HEAD
- * Created by jack on 3/15/17.
- * Austin Bullard
-=======
  * @author Jack Meyer (jacmeyer@iastate.edu)
- *
+ * Austin Bullard
  * A representation of a graph structure
->>>>>>> f5a42ec8825ba22455b0db1cb3d3bd38ded57a40
  */
 public class Graph {
 
