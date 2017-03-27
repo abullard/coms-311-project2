@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by jack on 3/10/17.
+ * @author Jack Meyer (jacmeyer@iastate.edu)
  * Austin Bullard
  */
 public class WikiCrawler {
@@ -21,6 +21,9 @@ public class WikiCrawler {
     private Queue<String> toProcessQueue = new ArrayDeque<>();
 
     private Set<String> visitedSet = new HashSet<>();
+
+    private int connectionCount = 0;
+
 
     public WikiCrawler(String seedUrl, int max, String fileName) {
         this.seedUrl = seedUrl;
@@ -75,7 +78,7 @@ public class WikiCrawler {
      * Consider the first max many pages that are visited when you do a BFS with seedUrl. The program should construct
      * the web graph only over those pages, and writes the graph to the file fileName.
      */
-    public void crawl() throws IOException {
+    public void crawl() throws IOException, InterruptedException {
 
 
         // construct graph
@@ -127,7 +130,10 @@ public class WikiCrawler {
                 full = true;
             }
 
-            // if just done loading
+            // if just done loading (we have reached the max), we want to continue to add edges between current url
+            // and the links that are going to be processed. We do not want to keep adding new verticies. Therefore, we
+            // check if the link is in the to process queue and then if it is, add an edge between the current url and
+            // the link
             if(justDoneLoading == true) {
                 for(i = i; i < links.size(); i++) {
                     if(toProcessQueue.contains(links.get(i))) {
@@ -137,13 +143,12 @@ public class WikiCrawler {
                 full = false;
             }
 
-            // if already loaded and 
+            // if already we have reached the max number of verticies, filter the links to only include the ones
+            // that are verticies, then add edges between the current url and the filtered links
             if(full == true) {
                 links = filterLinks(graph, links, currentUrl);
                 graph.addAllEdges(currentUrl, links);
             }
-
-
 
             // remove the element from the queue and set the current element to the next one
             toProcessQueue.remove(currentUrl);
@@ -151,15 +156,35 @@ public class WikiCrawler {
         }
 
 
+        // finally, write the graph to a file
+        writeGraphToFile(graph);
+
+    }
+
+    /**
+     * Writes a graph to the file specified in the constructor
+     *
+     * @param graph the graph to write to the file
+     * @throws IOException
+     */
+    private void writeGraphToFile(Graph graph) throws IOException {
         File file = new File(this.fileName);
         FileWriter fileWriter = new FileWriter(file);
         fileWriter.append(this.max + "\n");
         fileWriter.write(graph.toString());
         fileWriter.flush();
         fileWriter.close();
-
     }
 
+    /**
+     * Filters links based on if they are already in the graph or not. When filtering, we only want links that are
+     * apart of the graph. We also don't want duplicates, so we will filter out if they are eqaul to the current url.
+     *
+     * @param graph      the graph to get verticies from
+     * @param links      the links to filter
+     * @param currentUrl the current url
+     * @return the filtered links
+     */
     private List<String> filterLinks(Graph graph, List<String> links, String currentUrl) {
 
         Set vertexSet = new HashSet<>(graph.getVertices());
@@ -176,17 +201,35 @@ public class WikiCrawler {
         return filteredLinks;
     }
 
-    private String getHTMLStringFromLink(String url) throws IOException {
+    /**
+     * Gets the html from a link
+     *
+     * @param url the url to get html from
+     * @return the html in the form of a string
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    private String getHTMLStringFromLink(String url) throws IOException, InterruptedException {
+
+        // every 100 connection, we will sleep for three seconds
+        if(connectionCount >= 100) {
+            Thread.sleep(3000);
+            connectionCount = 0;
+        }
+
+        // make the connection
         URL fullUrl = new URL(BASE_URL + url);
         InputStream inputStream = fullUrl.openStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
+        // get the html
         String line;
         StringBuilder builder = new StringBuilder();
         while((line = reader.readLine()) != null) {
             builder.append(line);
         }
 
+        connectionCount++;
         return builder.toString();
     }
 

@@ -1,8 +1,14 @@
 import java.util.*;
 
 /**
+<<<<<<< HEAD
  * Created by jack on 3/15/17.
  * Austin Bullard
+=======
+ * @author Jack Meyer (jacmeyer@iastate.edu)
+ *
+ * A representation of a graph structure
+>>>>>>> f5a42ec8825ba22455b0db1cb3d3bd38ded57a40
  */
 public class Graph {
 
@@ -11,6 +17,10 @@ public class Graph {
 
     public Graph() {}
 
+    /**
+     * Adds a vertex to a graph and ensures that the vertex is not already in the graph
+     * @param vertex the vertex to add
+     */
     public void addVertex(String vertex) {
         if(!vertices.contains(vertex)) {
             this.vertices.add(vertex);
@@ -18,6 +28,11 @@ public class Graph {
         }
     }
 
+    /**
+     * Adds an edge to a graph, if the vertex's don't exist, it will make a new vertex
+     * @param fromVertex the from vertex
+     * @param toVertex the to vertex
+     */
     public void addEdge(String fromVertex, String toVertex) {
         // protect against circular references
         if(!fromVertex.equals(toVertex)) {
@@ -33,6 +48,11 @@ public class Graph {
         }
     }
 
+    /**
+     * Adds all edges from a list
+     * @param fromVertex the from vertex
+     * @param toVertexList the to vertex list
+     */
     public void addAllEdges(String fromVertex, List<String> toVertexList) {
         List<String> edges = this.adjecencyMatrix.get(fromVertex);
 
