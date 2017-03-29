@@ -23,8 +23,8 @@ public class GraphProcessor {
     private GraphSet reverse;
     private HashSet<String> revhs;
     private HashSet<String> orderhs;
-    private HashSet<String> dfshs;
     private HashSet<String> scchs;
+    private ArrayList<HashSet<String>> scc;
     private HashSet<String> n;
     private int counter;
     private ArrayList<Timer> times;
@@ -81,6 +81,7 @@ public class GraphProcessor {
         computeOrder();
         //unmark every vertex of V
         scchs = new HashSet<>();
+        scc = new ArrayList<>();
 
         for(Timer t : times) {
             String v = t.getVertex();
@@ -88,7 +89,7 @@ public class GraphProcessor {
                 //reusing revhs
                 revhs = new HashSet<>();
                 SccDFS(t.getVertex());
-                System.out.println(revhs);
+                scc.add(revhs);
             }
         }
     }
@@ -207,7 +208,6 @@ public class GraphProcessor {
      * @param v
      */
     private void finishDFS(String v) {
-        dfshs = new HashSet<>();
         //mark vertex
         orderhs.add(v);
 
@@ -215,7 +215,7 @@ public class GraphProcessor {
         for(String temp : findListofEdges(v)) {
             //if u is unmarked, DFS(G, u)
             if(!orderhs.contains(temp)) {
-                DFS(temp);
+                finishDFS(temp);
             }
         }
         //increment time
@@ -224,21 +224,6 @@ public class GraphProcessor {
         //FinishTime[v] = counter
         Timer vertex = new Timer(counter, v);
         times.add(vertex);
-    }
-
-    /**
-     * Depth First Search of graph
-     * @param v
-     *  Vertex
-     */
-    private void DFS(String v) {
-        dfshs.add(v);
-
-        for(String temp : findListofEdges(v)) {
-            if(!dfshs.contains(temp)) {
-                DFS(temp);
-            }
-        }
     }
 
     /**
@@ -252,7 +237,7 @@ public class GraphProcessor {
 
         for(String temp : findListofEdges(v)) {
             if(!scchs.contains(temp)) {
-                DFS(temp);
+                SccDFS(temp);
             }
         }
     }
@@ -282,51 +267,89 @@ public class GraphProcessor {
      *         false otherwise
      */
     public boolean sameComponent(String u, String v) {
-
-        // TODO find if u and v belong to the same SCC
-
-        return true;
+        for(HashSet<String> temp : scc) {
+            if(temp.contains(u) && temp.contains(v)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
-     * Return all of the verticies that belong to the same Strongly Connected Component of v (including v).
-     *
-     * @param v a vertex v
+     * Return all of the vertices that belong to the same Strongly Connected Component of v (including v).
+     * @param v
+     *  a vertex v
      */
-    public ArrayList<String> componentVerticies(String v) {
-        ArrayList<String> stronglyConnectedComponents = new ArrayList<>();
+    public ArrayList<String> componentVertices(String v) {
+        ArrayList<String> list = new ArrayList<>();
 
-        // TODO find all of the verticies that belong to the same SCC of v
-
-        return stronglyConnectedComponents;
+        for(HashSet<String> temp : scc) {
+            if(temp.contains(v)) {
+                Iterator iter = temp.iterator();
+                while(iter.hasNext()) {
+                    list.add((String) iter.next());
+                }
+            }
+        }
+        return list;
     }
 
     /**
      * Returns the size of the largest component
-     *
-     * @return the size of the largest component
+     * @return
+     *  the size of the largest component
      */
     public int largestComponent() {
+        int max = 0;
+        for(HashSet<String> temp : scc) {
+            if(temp.size() > max) {
+                max = temp.size();
+            }
+        }
 
-        // TODO find the size of the largest component
-
-        return 0;
+        return max;
     }
 
     /**
      * Returns the number of strongly connected components
-     *
-     * @return the number of strongly connected components
+     * @return
+     *  the number of strongly connected components
      */
     public int numComponents() {
-
-        // TODO find the number of strongly connected components
-
-        return 0;
+        return scc.size();
     }
 
+    /**
+     * Calculates the BFS path from u to v
+     * @param u
+     *  starting vertex
+     * @param v
+     *  ending vertex
+     * @return
+     *  ArrayList of strings, bfs path from u to v
+     */
     public ArrayList<String> bfsPath(String u, String v) {
-        ArrayList<String> list = new ArrayList<>();
-        return list;
+        ArrayList<String> s = new ArrayList<>();
+        LinkedList<String> queue = new LinkedList<>();
+
+        s.add(u);
+        queue.add(u);
+
+        while(!queue.isEmpty()) {
+            String current = queue.getFirst();
+            queue.remove(current);
+            if(current.equals(v)) {
+                s.add(v);
+                return s;
+            } else {
+                for(String temp : findListofEdges(current)) {
+                    if(!s.contains(temp)) {
+                        s.add(temp);
+                        queue.add(temp);
+                    }
+                }
+            }
+        }
+        return s;
     }
 }
