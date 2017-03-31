@@ -5,6 +5,12 @@ D F
 F E
 E A
 E D
+E F
+E G
 B G
+B A
+B C
+B F
+B D
 G C
 C B

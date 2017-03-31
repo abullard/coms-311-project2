@@ -24,7 +24,6 @@ public class WikiCrawler {
 
     private int connectionCount = 0;
 
-
     public WikiCrawler(String seedUrl, int max, String fileName) {
         this.seedUrl = seedUrl;
         this.max = max;
