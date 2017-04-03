@@ -1254,6 +1254,7 @@
 /wiki/Complex_systems /wiki/Control_theory
 /wiki/Complex_systems /wiki/Systems_analysis
 /wiki/Complex_systems /wiki/Systems_engineering
+/wiki/Complex_systems /wiki/Edsger_W._Dijkstra
 /wiki/Complex_systems /wiki/Claude_Shannon
 /wiki/Human%E2%80%93computer_interaction /wiki/Association_for_Computing_Machinery
 /wiki/Human%E2%80%93computer_interaction /wiki/Computer_graphics
@@ -1712,8 +1713,8 @@
 /wiki/History_of_computing_hardware /wiki/Information_Age
 /wiki/History_of_computing_hardware /wiki/Timeline_of_computing
 /wiki/History_of_computing_hardware /wiki/List_of_pioneers_in_computer_science
-/wiki/History_of_computing_hardware /wiki/International_Standard_Book_Number
 /wiki/History_of_computing_hardware /wiki/Wayback_Machine
+/wiki/History_of_computing_hardware /wiki/International_Standard_Book_Number
 /wiki/History_of_computing_hardware /wiki/Digital_object_identifier
 /wiki/History_of_computing_hardware /wiki/Brian_Randell
 /wiki/History_of_computing_hardware /wiki/Donald_Knuth
@@ -1953,6 +1954,7 @@
 /wiki/List_of_pioneers_in_computer_science /wiki/Linguistics
 /wiki/List_of_pioneers_in_computer_science /wiki/Programming_language_theory
 /wiki/List_of_pioneers_in_computer_science /wiki/Undecidable_problem
+/wiki/List_of_pioneers_in_computer_science /wiki/Bletchley_Park
 /wiki/List_of_pioneers_in_computer_science /wiki/Computational_complexity_theory
 /wiki/List_of_pioneers_in_computer_science /wiki/Structured_programming
 /wiki/List_of_pioneers_in_computer_science /wiki/Computer_network
@@ -1969,7 +1971,6 @@
 /wiki/List_of_pioneers_in_computer_science /wiki/Ada_Lovelace
 /wiki/List_of_pioneers_in_computer_science /wiki/Information_theory
 /wiki/List_of_pioneers_in_computer_science /wiki/Peter_Naur
-/wiki/List_of_pioneers_in_computer_science /wiki/Bletchley_Park
 /wiki/List_of_pioneers_in_computer_science /wiki/Mechanical_calculator
 /wiki/List_of_pioneers_in_computer_science /wiki/Mathematical_logic
 /wiki/List_of_pioneers_in_computer_science /wiki/Type_theory
@@ -1982,6 +1983,7 @@
 /wiki/List_of_pioneers_in_computer_science /wiki/List_of_computer_scientists
 /wiki/List_of_pioneers_in_computer_science /wiki/Timeline_of_computing
 /wiki/List_of_pioneers_in_computer_science /wiki/International_Standard_Book_Number
+/wiki/List_of_pioneers_in_computer_science /wiki/Digital_object_identifier
 /wiki/History_of_software_engineering /wiki/Software
 /wiki/History_of_software_engineering /wiki/Software_engineering
 /wiki/History_of_software_engineering /wiki/Computer_programming
@@ -3099,7 +3101,6 @@
 /wiki/Science /wiki/Computing
 /wiki/Science /wiki/International_Standard_Book_Number
 /wiki/Science /wiki/Digital_object_identifier
-/wiki/Society /wiki/Agriculture
 /wiki/Society /wiki/Neolithic_Revolution
 /wiki/Society /wiki/Technology
 /wiki/Society /wiki/Enterprise_software
@@ -4741,6 +4742,10 @@
 /wiki/Edsger_W._Dijkstra /wiki/Operations_research
 /wiki/Edsger_W._Dijkstra /wiki/Educational_technology
 /wiki/Edsger_W._Dijkstra /wiki/Document_management_system
+/wiki/Edsger_W._Dijkstra /wiki/Database
+/wiki/Edsger_W._Dijkstra /wiki/Complex_systems
+/wiki/Edsger_W._Dijkstra /wiki/Cybernetics
+/wiki/Edsger_W._Dijkstra /wiki/Claude_Shannon
 /wiki/Edsger_W._Dijkstra /wiki/Turing_Award
 /wiki/Computer_engineering /wiki/Electrical_engineering
 /wiki/Computer_engineering /wiki/Computer_hardware
@@ -4981,6 +4986,7 @@
 /wiki/Information_system /wiki/Control_theory
 /wiki/Information_system /wiki/Systems_analysis
 /wiki/Information_system /wiki/Systems_engineering
+/wiki/Information_system /wiki/Edsger_W._Dijkstra
 /wiki/Information_system /wiki/Claude_Shannon
 /wiki/Philosophy /wiki/Greek_language
 /wiki/Philosophy /wiki/Physics
@@ -5783,8 +5789,8 @@
 /wiki/Algebra /wiki/Category_theory
 /wiki/Algebra /wiki/Algorithm
 /wiki/Algebra /wiki/Gottfried_Leibniz
-/wiki/Algebra /wiki/Logic
 /wiki/Algebra /wiki/Boolean_algebra
+/wiki/Algebra /wiki/Logic
 /wiki/Algebra /wiki/International_Standard_Book_Number
 /wiki/Algebra /wiki/Digital_object_identifier
 /wiki/Algebra /wiki/Theory_of_computation
@@ -7151,7 +7157,7 @@
 /wiki/Quantum_computer /wiki/Control_theory
 /wiki/Quantum_computer /wiki/Philosophy_of_artificial_intelligence
 /wiki/Quantum_computer /wiki/Distributed_artificial_intelligence
-/wiki/Quantum_computer /wiki/Machine_learning
+/wiki/Quantum_computer /wiki/Outline_of_machine_learning
 /wiki/Quantum_computer /wiki/Supervised_learning
 /wiki/Quantum_computer /wiki/Unsupervised_learning
 /wiki/Quantum_computer /wiki/Reinforcement_learning
@@ -7399,6 +7405,7 @@
 /wiki/Claude_Shannon /wiki/Complex_systems
 /wiki/Claude_Shannon /wiki/Systems_analysis
 /wiki/Claude_Shannon /wiki/Systems_engineering
+/wiki/Claude_Shannon /wiki/Edsger_W._Dijkstra
 /wiki/Claude_Shannon /wiki/Donald_Knuth
 /wiki/Signal_processing /wiki/Information
 /wiki/Signal_processing /wiki/Numerical_analysis
@@ -8413,6 +8420,7 @@
 /wiki/Cybernetics /wiki/Information_system
 /wiki/Cybernetics /wiki/Operating_system
 /wiki/Cybernetics /wiki/Systems_analysis
+/wiki/Cybernetics /wiki/Edsger_W._Dijkstra
 /wiki/Cybernetics /wiki/Claude_Shannon
 /wiki/Applied_mathematics /wiki/Mathematics
 /wiki/Applied_mathematics /wiki/Science
@@ -9733,6 +9741,7 @@
 /wiki/Operating_system /wiki/Cybernetics
 /wiki/Operating_system /wiki/Systems_analysis
 /wiki/Operating_system /wiki/Systems_engineering
+/wiki/Operating_system /wiki/Edsger_W._Dijkstra
 /wiki/Operating_system /wiki/Claude_Shannon
 /wiki/Operating_system /wiki/ACM_Computing_Classification_System
 /wiki/Operating_system /wiki/Printed_circuit_board
@@ -10678,6 +10687,7 @@
 /wiki/Concurrency_(computer_science) /wiki/Database_management_system
 /wiki/Concurrency_(computer_science) /wiki/Concurrent_computing
 /wiki/Concurrency_(computer_science) /wiki/Distributed_computing
+/wiki/Concurrency_(computer_science) /wiki/Association_for_Computing_Machinery
 /wiki/Concurrency_(computer_science) /wiki/Digital_object_identifier
 /wiki/Concurrency_(computer_science) /wiki/International_Standard_Book_Number
 /wiki/Petri_net /wiki/Modeling_language
@@ -10971,6 +10981,7 @@
 /wiki/Structured_programming /wiki/Software_design
 /wiki/Structured_programming /wiki/Software_development
 /wiki/Structured_programming /wiki/Software_architecture
+/wiki/Structured_programming /wiki/Concurrency_(computer_science)
 /wiki/Structured_programming /wiki/Philosophy_of_computer_science
 /wiki/Structured_programming /wiki/Structured_analysis
 /wiki/Structured_programming /wiki/David_Parnas
@@ -13128,6 +13139,7 @@
 /wiki/Software_architecture /wiki/Concurrent_computing
 /wiki/Software_architecture /wiki/Distributed_computing
 /wiki/Software_architecture /wiki/Software_development
+/wiki/Software_architecture /wiki/Concurrency_(computer_science)
 /wiki/Software_architecture /wiki/Philosophy_of_computer_science
 /wiki/Software_architecture /wiki/Structured_programming
 /wiki/Software_architecture /wiki/List_of_pioneers_in_computer_science
@@ -13772,6 +13784,7 @@
 /wiki/Structured_analysis /wiki/Concurrent_computing
 /wiki/Structured_analysis /wiki/Distributed_computing
 /wiki/Structured_analysis /wiki/Software_development
+/wiki/Structured_analysis /wiki/Concurrency_(computer_science)
 /wiki/Structured_analysis /wiki/Philosophy_of_computer_science
 /wiki/Structured_analysis /wiki/List_of_pioneers_in_computer_science
 /wiki/Structured_analysis /wiki/List_of_important_publications_in_computer_science
@@ -16571,6 +16584,7 @@
 /wiki/Grady_Booch /wiki/Ivar_Jacobson
 /wiki/Grady_Booch /wiki/James_Rumbaugh
 /wiki/Grady_Booch /wiki/Software_engineering
+/wiki/Grady_Booch /wiki/IEEE_Computer_Society
 /wiki/Grady_Booch /wiki/Association_for_Computing_Machinery
 /wiki/Grady_Booch /wiki/IBM
 /wiki/Grady_Booch /wiki/Computer_programming
@@ -19300,10 +19314,10 @@
 /wiki/Network_protocol /wiki/Computer_hardware
 /wiki/Network_protocol /wiki/Software
 /wiki/Network_protocol /wiki/Programming_language
-/wiki/Network_protocol /wiki/Internet
 /wiki/Network_protocol /wiki/Algorithm
 /wiki/Network_protocol /wiki/Operating_system
 /wiki/Network_protocol /wiki/Systems_engineering
+/wiki/Network_protocol /wiki/Internet
 /wiki/Network_protocol /wiki/International_Standard_Book_Number
 /wiki/Network_protocol /wiki/Digital_object_identifier
 /wiki/Network_protocol /wiki/History_of_the_Internet
@@ -21129,6 +21143,7 @@
 /wiki/Computer_data_storage /wiki/Throughput
 /wiki/Computer_data_storage /wiki/Computer_network
 /wiki/Computer_data_storage /wiki/Internet
+/wiki/Computer_data_storage /wiki/International_Standard_Book_Number
 /wiki/Computer_data_storage /wiki/Wayback_Machine
 /wiki/Computer_data_storage /wiki/Digital_object_identifier
 /wiki/Enterprise_information_system /wiki/Information_system
@@ -21389,7 +21404,7 @@
 /wiki/Visualization_(computer_graphics) /wiki/Control_theory
 /wiki/Visualization_(computer_graphics) /wiki/Philosophy_of_artificial_intelligence
 /wiki/Visualization_(computer_graphics) /wiki/Distributed_artificial_intelligence
-/wiki/Visualization_(computer_graphics) /wiki/Machine_learning
+/wiki/Visualization_(computer_graphics) /wiki/Outline_of_machine_learning
 /wiki/Visualization_(computer_graphics) /wiki/Supervised_learning
 /wiki/Visualization_(computer_graphics) /wiki/Unsupervised_learning
 /wiki/Visualization_(computer_graphics) /wiki/Reinforcement_learning
@@ -21714,6 +21729,7 @@
 /wiki/Control_theory /wiki/Complex_systems
 /wiki/Control_theory /wiki/Systems_analysis
 /wiki/Control_theory /wiki/Systems_engineering
+/wiki/Control_theory /wiki/Edsger_W._Dijkstra
 /wiki/Control_theory /wiki/Claude_Shannon
 /wiki/Control_theory /wiki/Algebra
 /wiki/Control_theory /wiki/Mathematical_analysis
@@ -22277,6 +22293,7 @@
 /wiki/Operations_research /wiki/Cybernetics
 /wiki/Operations_research /wiki/Systems_analysis
 /wiki/Operations_research /wiki/Systems_engineering
+/wiki/Operations_research /wiki/Edsger_W._Dijkstra
 /wiki/Operations_research /wiki/Claude_Shannon
 /wiki/Operations_research /wiki/Algebra
 /wiki/Operations_research /wiki/Mathematical_analysis

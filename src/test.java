@@ -9,16 +9,8 @@ import java.util.Scanner;
  */
 public class test {
     public static void main(String[] args) throws IOException, InterruptedException {
-//        WikiCrawler wc = new WikiCrawler("/wiki/Computer_Science", 500, "WikiCS.txt");
-//        wc.crawl();
-        GraphProcessor gp = new GraphProcessor("WikiCS.txt");
-
-        System.out.println("Number of components of the graph: " + gp.numComponents());
-
-        System.out.println("Size of largest component: " + gp.largestComponent());
-
-
-
+        WikiCrawler wc = new WikiCrawler("/wiki/Computer_Science", 500, "WikiCS.txt");
+        wc.crawl();
+        GraphProcessor gp = new GraphProcessor("wikiCS.txt");
     }
-
 }

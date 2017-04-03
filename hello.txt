@@ -1,16 +1,19 @@
-7
-A D
-A B
-D F
-F E
-E A
-E D
-E F
-E G
-B G
+15
+A C
+C D
+D B
 B A
-B C
-B F
-B D
-G C
-C B
+C E
+E F
+F G
+G H
+H E
+F I
+I J
+J K
+K I
+I L
+L M
+M O
+O N
+N L

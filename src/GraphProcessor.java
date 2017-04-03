@@ -83,7 +83,8 @@ public class GraphProcessor {
         scchs = new HashSet<>();
         scc = new ArrayList<>();
 
-        for(Timer t : times) {
+        for (int i = times.size() - 1; i >= 0; i--) {
+            Timer t = times.get(i);
             String v = t.getVertex();
             if(!scchs.contains(v)){
                 //reusing revhs
@@ -110,15 +111,16 @@ public class GraphProcessor {
         times = new ArrayList<>();
         //construct HashSet for marking vertices (unmarks all vertices)
         orderhs = new HashSet<>();
-        //get the adjacency matrix for size of
-        HashMap<String, HashSet<String>> hm = g.getAdjecencyMatrix();
-        //create iterator for elements in adjacency matrix
-        Iterator iter = hm.keySet().iterator();
 
         //reverse the graph
         reverse = new GraphSet();
         revGraph(g.getAdjecencyMatrix());
         counter = 0;
+
+        //get the adjacency matrix for the reverse Graph
+        HashMap<String, HashSet<String>> hm = reverse.getAdjecencyMatrix();
+        //create iterator for elements in adjacency matrix
+        Iterator iter = hm.keySet().iterator();
 
         while(iter.hasNext()) {
             String v = (String) iter.next();
@@ -149,7 +151,7 @@ public class GraphProcessor {
         String v = (String) pair.getKey();
 
         //get the values, or outward edges
-        HashSet<String> set = findListofEdges(v);
+        HashSet<String> set = findListofEdges(v, false);
 
         //reverse the vertices outward edges
         reverseVertex(v, set);
@@ -164,7 +166,6 @@ public class GraphProcessor {
      */
     private void reverseVertex(String v, HashSet<String> set) {
         if(!revhs.contains(v)) {
-
             //mark v as visited
             revhs.add(v);
             reverse.addVertex(v);
@@ -179,9 +180,8 @@ public class GraphProcessor {
                     reverse.addEdge(temp, v);
                 }
             }
-
             for (String temp : n) {
-                HashSet<String> nextEdges = findListofEdges(temp);
+                HashSet<String> nextEdges = findListofEdges(temp, false);
                 reverseVertex(temp, nextEdges);
             }
         }
@@ -194,13 +194,24 @@ public class GraphProcessor {
      * @return
      *  list of outwards edges of given vertex
      */
-    private HashSet<String> findListofEdges(String v) {
-        HashMap<String, HashSet<String>> hm = g.getAdjecencyMatrix();
-        HashSet<String> set = new HashSet<>();
-        if(hm.containsKey(v)) {
-           set = hm.get(v);
+    private HashSet<String> findListofEdges(String v, boolean rev) {
+        if(rev) {
+            HashMap<String, HashSet<String>> hm = reverse.getAdjecencyMatrix();
+            HashSet<String> set = new HashSet<>();
+            if(hm.containsKey(v)) {
+                set = hm.get(v);
+            }
+
+            return set;
+        } else {
+            HashMap<String, HashSet<String>> hm = g.getAdjecencyMatrix();
+            HashSet<String> set = new HashSet<>();
+            if(hm.containsKey(v)) {
+                set = hm.get(v);
+            }
+
+            return set;
         }
-        return set;
     }
 
     /**
@@ -212,7 +223,7 @@ public class GraphProcessor {
         orderhs.add(v);
 
         //for every u such that <v, u> /in E
-        for(String temp : findListofEdges(v)) {
+        for(String temp : findListofEdges(v, true)) {
             //if u is unmarked, DFS(G, u)
             if(!orderhs.contains(temp)) {
                 finishDFS(temp);
@@ -235,7 +246,7 @@ public class GraphProcessor {
         scchs.add(v);
         revhs.add(v);
 
-        for(String temp : findListofEdges(v)) {
+        for(String temp : findListofEdges(v, false)) {
             if(!scchs.contains(temp)) {
                 SccDFS(temp);
             }
@@ -254,6 +265,7 @@ public class GraphProcessor {
         if(map.containsKey(v)){
             return map.get(v).size();
         }
+
         return -1;
     }
 
@@ -272,6 +284,7 @@ public class GraphProcessor {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -291,6 +304,7 @@ public class GraphProcessor {
                 }
             }
         }
+
         return list;
     }
 
@@ -328,21 +342,45 @@ public class GraphProcessor {
      * @return
      *  ArrayList of strings, bfs path from u to v
      */
-//    public ArrayList<String> bfsPath(String u, String v) {
-//        HashMap<String, String> map = new HashMap<>();
-//        LinkedList<String> q = new LinkedList<>();
-//
-//        q.add(u);
-//
-//        while(!q.isEmpty()) {
-//            String current = q.getFirst();
-//
-//            for(String temp : findListofEdges(current)) {
-//
-//            }
-//
-//        }
-//
-//    }
+    public ArrayList<String> bfsPath(String u, String v) {
+        HashMap<String, String> map = new HashMap<>();
+        LinkedList<String> q = new LinkedList<>();
+        ArrayList<String> list = new ArrayList<>();
 
+        q.add(u);
+        map.put(u, null);
+
+        while(!q.isEmpty()) {
+            String current = q.getFirst();
+            q.removeFirst();
+            if(current.equals(v)) {
+                while(map.get(current) != null) {
+                    list.add(current);
+                    current = map.get(current);
+                }
+                list.add(current);
+            } else {
+                for(String temp : findListofEdges(current, false)) {
+                    q.add(temp);
+                    map.put(temp, current);
+                }
+            }
+        }
+        return reverseList(list);
+    }
+
+    /**
+     * Reverses an ArrayList<String>
+     * @param list
+     *  the list to be reversed
+     * @return
+     *  the reversed list
+     */
+    private ArrayList<String> reverseList(ArrayList<String> list) {
+        ArrayList<String> arr = new ArrayList<>();
+        for(int i = list.size() - 1; i >= 0; i--) {
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
 }
